@@ -6,7 +6,9 @@ function SearchResults(props) {
     id: 2},  {artist: 'Nick A', name: 'Woofy is awesome', album: 'Woofy part 2', id: 3}];
 
     return (
-        <TrackList tracks = {temp}/>
+        <div className = 'searchresults'>
+            <TrackList tracks = {temp} addPlay = {props.addPlay}/>
+        </div>
     );
 }
 

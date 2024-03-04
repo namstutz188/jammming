@@ -6,13 +6,20 @@ import Track from './Track';
 function TrackList(props) {
 
     return (
-        <>
-            {
-                props.tracks.map(track => {
-                   return <Track track = {track} key = {track.id} />;
-                })
-            }
-        </>
+        <div className = 'trackList'>
+        {
+            props.tracks.map(track => {
+                return (
+                <div className = 'trackL' key = {track.id + 'l'}>
+                    <Track track = {track}/>
+                    <div className = 'add'>
+                        <p onClick = {props.addPlay} valueName = {track.name} valueArtist = {track.artist} valueAlbum = {track.album} valueID = {track.id}>+</p>
+                    </div>
+                </div>
+                )
+            })
+        }
+        </div>
     );
 }
 
