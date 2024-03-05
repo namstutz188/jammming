@@ -17,11 +17,6 @@ function App() {
     setPlaylist([...playlist, newTrack]);
   };
 
-  const removeFromPlaylist = (e) => {
-    const index = Number(e.target.getAttribute('valueindex'));
-    setPlaylist(list =>  list.filter((_,j) => j !== index));
-  };
-
   return (
     <div className="App">
       <SearchBar addPlay = {addToPlaylist}/>
