@@ -7,24 +7,24 @@ function App() {
 
   const addToPlaylist = (e) => {
     const newTrack = {
-      name: e.target.valueName,
-      album: e.target.valueAlbum,
-      id: e.target.valueID,
-      artist: e.target.valueArtist
+      name: e.target.getAttribute('valuename'),
+      album: e.target.getAttribute('valuealbum'),
+      id: e.target.getAttribute('valueid'),
+      artist: e.target.getAttribute('valueartist')
     }
     console.log(e.target.valueName);
-    return setPlaylist([...playlist, newTrack]);
+    setPlaylist([...playlist, newTrack]);
   };
 
   const removeFromPlaylist = (e) => {
-    return setPlaylist(list => list.filter(track => track.id !== e.target.value));
+    const index = Number(e.target.getAttribute('valueindex'));
+    setPlaylist(list =>  list.filter((_,j) => j !== index));
   };
 
   return (
     <div className="App">
       <SearchBar addPlay = {addToPlaylist}/>
       <PlayList playlist = {playlist} removePlay = {removeFromPlaylist}/>
-      <p>{'[' + playlist + ']'}</p>
     </div>
   );
 }

@@ -3,7 +3,7 @@ import React, {useState} from 'react';
 function Track(props) {
     return (
         <div className = 'details'>
-            <h1>{props.track.name}</h1>
+            <h2>{props.track.name}</h2>
             <p>{props.track.artist + ' | ' + props.track.album}</p>
         </div>
 
