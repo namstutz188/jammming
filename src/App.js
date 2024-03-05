@@ -13,7 +13,7 @@ function App() {
       artist: e.target.getAttribute('valueartist'),
       uri: e.target.getAttribute('valueuri')
     }
-    console.log(e.target.valueName);
+
     setPlaylist([...playlist, newTrack]);
   };
 
