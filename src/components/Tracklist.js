@@ -13,7 +13,7 @@ function TrackList(props) {
                 <div className = 'trackL' key = {String(i) + 'l'}>
                     <Track track = {track}/>
                     <div className = 'add'>
-                        <p onClick = {props.addPlay} valuename = {track.name} valueartist = {track.artist} valuealbum = {track.album} valueid = {track.id}>+</p>
+                        <p onClick = {props.addPlay} valuename = {track.name} valueartist = {track.artist} valuealbum = {track.album} valueid = {track.id} valueuri = {track.uri}>+</p>
                     </div>
                 </div>
                 )

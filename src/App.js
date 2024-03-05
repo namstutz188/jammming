@@ -10,7 +10,8 @@ function App() {
       name: e.target.getAttribute('valuename'),
       album: e.target.getAttribute('valuealbum'),
       id: e.target.getAttribute('valueid'),
-      artist: e.target.getAttribute('valueartist')
+      artist: e.target.getAttribute('valueartist'),
+      uri: e.target.getAttribute('valueuri')
     }
     console.log(e.target.valueName);
     setPlaylist([...playlist, newTrack]);
@@ -24,7 +25,7 @@ function App() {
   return (
     <div className="App">
       <SearchBar addPlay = {addToPlaylist}/>
-      <PlayList playlist = {playlist} removePlay = {removeFromPlaylist}/>
+      <PlayList playlist = {playlist} setPlaylist = {setPlaylist}/>
     </div>
   );
 }
