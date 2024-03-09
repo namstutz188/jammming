@@ -9,11 +9,18 @@ function TrackList(props) {
         <div className = 'trackList'>
         {
             props.tracks.map((track,i) => {
+                let trackMod = {
+                    name: track.name,
+                    album: track.album.name,
+                    id: track.id,
+                    artist: track.artists[0].name,
+                    uri: track.uri
+                };
                 return (
                 <div className = 'trackL' key = {String(i) + 'l'}>
-                    <Track track = {track}/>
+                    <Track track = {trackMod}/>
                     <div className = 'add'>
-                        <p onClick = {props.addPlay} valuename = {track.name} valueartist = {track.artist} valuealbum = {track.album} valueid = {track.id} valueuri = {track.uri}>+</p>
+                        <p onClick = {props.addPlay} valuename = {track.name} valueartist = {track.artists[0].name} valuealbum = {track.album.name} valueid = {track.id} valueuri = {track.uri}>+</p>
                     </div>
                 </div>
                 )
