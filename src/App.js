@@ -7,6 +7,7 @@ import React, {useState} from 'react';
 function App() {
 
   const [playlist,setPlaylist] = useState([]);
+  const [access_token, setAccessToken] = useState('');
 
   const addToPlaylist = (e) => {
     const newTrack = {
@@ -22,8 +23,8 @@ function App() {
 
   return (
     <div className="App">
-      <SearchBar addPlay = {addToPlaylist}/>
-      <PlayList playlist = {playlist} setPlaylist = {setPlaylist}/>
+      <SearchBar addPlay = {addToPlaylist} aToken = {access_token} setToken = {setAccessToken}/>
+      <PlayList playlist = {playlist} setPlaylist = {setPlaylist} aToken = {access_token}/>
     </div>
   );
 }

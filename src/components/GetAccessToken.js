@@ -12,16 +12,6 @@ function getAccessToken() {
         url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
         
         window.location = url;
-       /* const response = await fetch(url);
-
-        if (response.ok) {
-            const currentUrl = window.location.href;
-            const urlParams = new URLSearchParams(currentUrl);
-
-            return urlParams.get('access_token');
-
-        }
-        throw new Error ('Request failed');*/
 
 }
 

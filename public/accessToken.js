@@ -11,7 +11,7 @@ function getAccessToken() {
     url += '?response_type=token';
     url += '&client_id=' + encodeURIComponent(clientID);
     url += '&redirect_uri=' + encodeURIComponent(redirect_uri);
-    
+    url += '&scope=user-read-private user-read-email playlist-modify-public playlist-modify-private';
     window.location = url;
    /* const response = await fetch(url);
 
@@ -22,11 +22,10 @@ function getAccessToken() {
         return urlParams.get('access_token');
 
     }
-    throw new Error ('Request failed');*/
-
+    throw new Error ('Request failed'); */
 }
 
-//Gets the access token jusst one time!
+//Gets the access token just one time!
 
 if (window.location.href === redirect_uri) {
     getAccessToken();

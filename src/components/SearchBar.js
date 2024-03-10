@@ -1,13 +1,19 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import SearchResults from './SearchResults';
 //form to type in search, passes to results to get them
 //for onSubmit, may want this to be changing the form value to trigger a re render...
 function SearchBar(props) {
     const [search,setSearch] = useState('');
 
+
     //Get Access token to make calls
-    const searchParams = new URLSearchParams(window.location.hash); //if after # then .has, after ? then .search
-    const access_token = searchParams.get('#access_token');
+    useEffect(() => {
+        if (props.aToken === '') {
+            const searchParams = new URLSearchParams(window.location.hash); //if after # then .has, after ? then .search
+            props.setToken(searchParams.get('#access_token'));
+        }
+    },[]);
+    
 
     const [tracks,setTracks] = useState([])
 
@@ -22,7 +28,7 @@ function SearchBar(props) {
 
             let response = await fetch(host+endpoint+query, {
                 headers: {
-                    'Authorization': 'Bearer ' + access_token
+                    'Authorization': 'Bearer ' + props.aToken
                 }
             })
 

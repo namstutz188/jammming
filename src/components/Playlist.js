@@ -3,7 +3,11 @@ import Track from './Track';
 
 function PlayList(props) {
 
-    const [title, setTitle] = useState('')
+    const [title, setTitle] = useState('');
+
+    const [userID, setUserID] = useState('');
+
+    const [playlistID, setPlaylistID] = useState('');
 
     const uris = [];
     props.playlist.forEach(track => uris.push(track.uri)); //spotify uses to referemce tracks in the spotify libray
@@ -13,11 +17,98 @@ function PlayList(props) {
         props.setPlaylist(list =>  list.filter((_,j) => j !== index));
     };
 
-    const handleSubmit = (e) => {
-        //eventually do something else in here to save to spotify!
-        e.preventDefault();
-        props.setPlaylist([]);
+    async function getUserId() {
+
+        try {
+            let url = 'https://api.spotify.com/';
+            let endpoint = 'v1/me';
+            let response = await fetch(url + endpoint, {
+                headers: {
+                    'Authorization': 'Bearer ' + props.aToken
+                }
+            })
+
+            if (response.ok) {
+                const jsonResponse = await response.json();
+
+                setUserID(jsonResponse.id);
+            } else {
+                throw new Error('Fail userID get');
+            }
+        } catch(e) {
+            console.log(e);
+        }
+        
+    };
+
+    async function createPlaylist() {
+        try {
+            let url = 'https://api.spotify.com/';
+            let endpoint = 'v1/users/' + userID + '/playlists'
+            let response = await fetch(url+endpoint, {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + props.aToken
+                },
+                data: {
+                    'name': title,
+                    'description': 'New Playlist Created on Jammming',
+                    'public': false
+                }
+            })
+
+            if (response.ok) {
+                let jsonResponse = await response.json();
+                setPlaylistID(jsonResponse.id);
+            } else {
+                throw new Error('Fail create playlist');
+            }
+        } catch(e) {
+            console.log(e);
+        }
     }
+
+    async function addPlaylist(e) {
+        try {
+
+            let url = 'https://api/spotify.com/';
+            let endpoint = 'v1/playlists/' + playlistID + '/tracks';
+            //let uriString = uris.join(); //joins by comma
+            let response = await fetch(url+endpoint, {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + props.aToken
+                },
+                data: {
+                    'uris': uris
+                }
+            })
+
+            if(response.ok) {
+                props.setPlaylist([]);
+            } else {
+                throw new Error('Error add tracks!');
+            }
+
+        } catch(er) {
+            console.log(er);
+        }
+    }
+
+
+     async function handleSubmit (e) {
+        
+        //Get UserID
+        e.preventDefault();
+
+        if (userID === '') {
+           await getUserId();
+        }
+        //Create playlist
+        await createPlaylist();
+        //Add items to playlist
+        await addPlaylist();
+    };
     
 
     return (
