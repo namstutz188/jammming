@@ -30,3 +30,5 @@ function getAccessToken() {
 if (window.location.href === redirect_uri) {
     getAccessToken();
 }
+
+//getAccessToken();
